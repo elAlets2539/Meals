@@ -15,7 +15,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        emailTextField.backgroundColor = UIColor(named: "Element Bg Sand")
+        passwordTextField.backgroundColor = UIColor(named: "Element Bg Sand")
+        
     }
     
     @IBAction func loginPressed(_ sender: UIButton) {
@@ -29,7 +32,9 @@ class LoginViewController: UIViewController {
                 } else {
                     User.id = Auth.auth().currentUser!.uid
 //                    print(User.id)
-                    self.performSegue(withIdentifier: "LoginSegue", sender: self)
+                    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: nil, action: nil)
+                    let inicioVC = self.storyboard?.instantiateViewController(withIdentifier: "InicioVC") as! InicioViewController
+                    self.navigationController?.pushViewController(inicioVC, animated: true)
                 }
                 
             }

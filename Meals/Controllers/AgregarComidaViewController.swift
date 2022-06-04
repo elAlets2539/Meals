@@ -35,6 +35,17 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         ingredientesTableView.delegate = self
         ingredientesTableView.dataSource = self
         
+        setupElements()
+        
+    }
+    
+    func setupElements() {
+        
+        ingredientesTableView.layer.cornerRadius = 20
+        ingredientesTableView.backgroundColor = UIColor(named: "Element Bg Sand")
+        
+        nombreTextField.backgroundColor = UIColor(named: "Element Bg Sand")
+        
     }
     
     @IBAction func addIngredientePressed(_ sender: UIButton) {
@@ -42,6 +53,10 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         let pop = Popup()
         pop.delegate = self
         view.addSubview(pop)
+        pop.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        pop.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        pop.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pop.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
     }
     
@@ -69,6 +84,10 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
 
         }
         
+    }
+    
+    @IBAction func cancelarPressed(_ sender: UIButton) {
+        self.dismiss(animated: true)
     }
     
     func ingredienteRegistrado(nombre: String, tipo: Ingrediente.Tipo, porcion: Int, unidad: Ingrediente.Unidad, cantidad: Int) {

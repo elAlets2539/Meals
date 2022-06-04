@@ -12,7 +12,11 @@ class InicioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "Elements")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
     
     @IBAction func registrarComidaPressed(_ sender: UIButton) {
@@ -26,6 +30,16 @@ class InicioViewController: UIViewController {
         self.performSegue(withIdentifier: "AgregarComidaSegue", sender: self)
         
     }
+    
+    @IBAction func verMenuPressed(_ sender: UIButton) {
+        
+        let menuTableViewController = MenuTableViewController()
+        menuTableViewController.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(menuTableViewController, animated: true)
+        //self.present(menuTableViewController, animated: true)
+        
+    }
+    
     /*
     // MARK: - Navigation
 

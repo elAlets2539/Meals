@@ -27,7 +27,18 @@ class Popup: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Nombre de ingrediente"
         textField.borderStyle = .roundedRect
+        textField.backgroundColor = UIColor(named: "Element Bg Light Green")
         return textField
+    }()
+    
+    private lazy var nombreView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(nombreTextField)
+        nombreTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nombreTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        nombreTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        return view
     }()
     
     //MARK: - Tipo del ingrediente
@@ -35,25 +46,37 @@ class Popup: UIView {
     private let tipoPicker: UIPickerView = {
         let picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.tintColor = UIColor(named: "Text")
         return picker
     }()
     
     //MARK: - Porciones
     
-    private let porcionTextField: UITextField = {
+    let porcionTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Porción"
         textField.keyboardType = .numberPad
         textField.borderStyle = .roundedRect
+        textField.backgroundColor = UIColor(named: "Element Bg Light Green")
         return textField
+    }()
+    
+    private lazy var porcionTextFieldView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(porcionTextField)
+        porcionTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        porcionTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        porcionTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
+        return view
     }()
     
     private let unidadButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Unidad", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor(named: "Text"), for: .normal)
         
         let taza = UIAction(title: "tz") { (action) in
             button.setTitle("tz", for: .normal)
@@ -73,42 +96,88 @@ class Popup: UIView {
         return button
     }()
     
+    private lazy var unidadView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(unidadButton)
+        unidadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        unidadButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        unidadButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        return view
+    }()
+    
     private lazy var porcionStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [porcionTextField, unidadButton])
+        let stack = UIStackView(arrangedSubviews: [porcionTextFieldView, unidadView])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .equalSpacing
+        stack.alignment = .center
+        porcionTextFieldView.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+        porcionTextFieldView.bottomAnchor.constraint(equalTo: stack.bottomAnchor).isActive = true
+        porcionTextFieldView.leadingAnchor.constraint(equalTo: stack.leadingAnchor).isActive = true
+        unidadView.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+        unidadView.leadingAnchor.constraint(equalTo: porcionTextFieldView.trailingAnchor).isActive = true
+        unidadView.bottomAnchor.constraint(equalTo: stack.bottomAnchor).isActive = true
         return stack
     }()
     
     //MARK: - Cantidades
     
-    private let quitarIngredienteButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "minus"), for: .normal)
-        button.addTarget(self, action: #selector(quitarIngrediente), for: .touchUpInside)
-        return button
+    private var quitarIngredienteButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let quitarIngredienteButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setImage(UIImage(systemName: "minus"), for: .normal)
+            button.tintColor = UIColor(named: "Elements")
+            button.addTarget(self, action: #selector(quitarIngrediente), for: .touchUpInside)
+            return button
+        }()
+        view.addSubview(quitarIngredienteButton)
+        quitarIngredienteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        quitarIngredienteButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return view
     }()
     
     private let cantidadLabel: UILabel = {
        let label = UILabel()
         label.text = "1"
-        label.tintColor = .black
+        label.tintColor = UIColor(named: "Text")
         return label
     }()
     
-    private let anadirIngredienteButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.addTarget(self, action: #selector(anadirIngrediente), for: .touchUpInside)
-        return button
+    private var anadirIngredienteButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let anadirIngredienteButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.setImage(UIImage(systemName: "plus"), for: .normal)
+            button.tintColor = UIColor(named: "Elements")
+            button.addTarget(self, action: #selector(anadirIngrediente), for: .touchUpInside)
+            return button
+        }()
+        view.addSubview(anadirIngredienteButton)
+        anadirIngredienteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        anadirIngredienteButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        return view
     }()
     
     private lazy var cantidadesStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [quitarIngredienteButton, cantidadLabel, anadirIngredienteButton])
+        let stack = UIStackView(arrangedSubviews: [quitarIngredienteButtonView, cantidadLabel, anadirIngredienteButtonView])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .equalSpacing
+        cantidadLabel.centerXAnchor.constraint(equalTo: stack.centerXAnchor).isActive = true
+        cantidadLabel.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+        cantidadLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor).isActive = true
+        quitarIngredienteButtonView.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+        quitarIngredienteButtonView.bottomAnchor.constraint(equalTo: stack.bottomAnchor).isActive = true
+        quitarIngredienteButtonView.leadingAnchor.constraint(equalTo: stack.leadingAnchor).isActive = true
+        quitarIngredienteButtonView.trailingAnchor.constraint(equalTo: cantidadLabel.leadingAnchor).isActive = true
+        anadirIngredienteButtonView.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+        anadirIngredienteButtonView.bottomAnchor.constraint(equalTo: stack.bottomAnchor).isActive = true
+        anadirIngredienteButtonView.leadingAnchor.constraint(equalTo: cantidadLabel.trailingAnchor).isActive = true
+        anadirIngredienteButtonView.trailingAnchor.constraint(equalTo: stack.trailingAnchor).isActive = true
         return stack
     }()
     
@@ -116,14 +185,17 @@ class Popup: UIView {
     
     private let agregarButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = UIColor(named: "Inicio Buttons")
+//        button.setBackgroundImage(UIImage(color: UIColor(named: "Inicio Buttons")!), for: .normal)
         button.setTitle("Agregar", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor(named: "Elements"), for: .normal)
         button.addTarget(self, action: #selector(agregarPressed), for: .touchUpInside)
         return button
     }()
     
     private let cancelarButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = UIColor(named: "Inicio Buttons")
         button.setTitle("Cancelar", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.addTarget(self, action: #selector(animateOut), for: .touchUpInside)
@@ -141,17 +213,19 @@ class Popup: UIView {
         let stack = UIStackView(arrangedSubviews: [nombreTextField, tipoPicker, porcionStack, cantidadesStack, accionesStack])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.distribution = .equalSpacing
+        stack.distribution = .fillProportionally
         return stack
     }()
     
     private let container: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .white
+        v.backgroundColor = UIColor(named: "Inicio Buttons")
         v.layer.cornerRadius = 24
         return v
     }()
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         
@@ -163,22 +237,43 @@ class Popup: UIView {
         tipoPicker.dataSource = self
         tipoPicker.delegate = self
         
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
         self.addSubview(container)
         container.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65).isActive = true
         
-        container.addSubview(stack)
+        container.addSubview(nombreView)
+        nombreView.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.2).isActive = true
+        nombreView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        nombreView.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        nombreView.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
         
-        //        stack.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-        stack.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        //        stack.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-        stack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.8).isActive = true
-        stack.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        //        nombreTextField.widthAnchor.constraint(equalTo: stack.widthAnchor, multiplier: 0.9).isActive = true
-        //        nombreTextField.centerXAnchor.constraint(equalTo: stack.centerXAnchor).isActive = true
+        container.addSubview(tipoPicker)
+        tipoPicker.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.3).isActive = true
+        tipoPicker.topAnchor.constraint(equalTo: nombreView.bottomAnchor).isActive = true
+        tipoPicker.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        tipoPicker.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        
+        container.addSubview(porcionStack)
+        porcionStack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.2).isActive = true
+        porcionStack.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.8).isActive = true
+        porcionStack.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        porcionStack.topAnchor.constraint(equalTo: tipoPicker.bottomAnchor).isActive = true
+        
+        container.addSubview(cantidadesStack)
+        cantidadesStack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.2).isActive = true
+        cantidadesStack.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.8).isActive = true
+        cantidadesStack.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        cantidadesStack.topAnchor.constraint(equalTo: porcionStack.bottomAnchor).isActive = true
+        
+        container.addSubview(accionesStack)
+        accionesStack.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 0.1).isActive = true
+        accionesStack.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.8).isActive = true
+        accionesStack.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        accionesStack.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
         
         animateIn()
         
@@ -314,3 +409,21 @@ extension Popup: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
+
+//public extension UIImage {
+//
+//    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+//
+//        let rect = CGRect(origin: .zero, size: size)
+//        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+//        color.setFill()
+//        UIRectFill(rect)
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        guard let cgImage = image?.cgImage else { return nil }
+//        self.init(cgImage: cgImage)
+//
+//    }
+//
+//}

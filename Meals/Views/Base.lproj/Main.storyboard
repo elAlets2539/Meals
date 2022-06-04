@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AAk-9N-5yK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -18,10 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2l6-ab-XQS" userLabel="Image View View">
-                                <rect key="frame" x="0.0" y="44" width="414" height="245.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="232"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3ZH-lE-e1s">
-                                        <rect key="frame" x="41.5" y="24.5" width="331" height="196.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3ZH-lE-e1s">
+                                        <rect key="frame" x="41.5" y="23.5" width="331" height="185"/>
+                                        <color key="tintColor" red="0.75686274509999996" green="0.67450980390000004" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -47,12 +48,12 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dmF-eS-REx" userLabel="Login View">
-                                <rect key="frame" x="0.0" y="691.5" width="414" height="204.5"/>
+                                <rect key="frame" x="0.0" y="702.5" width="414" height="193.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbb-bC-fSx">
-                                        <rect key="frame" x="103.5" y="87" width="207" height="31"/>
+                                        <rect key="frame" x="103.5" y="81.5" width="207" height="31"/>
                                         <color key="backgroundColor" name="Buttons"/>
-                                        <color key="tintColor" name="Text"/>
+                                        <color key="tintColor" red="0.37647058823529411" green="0.3411764705882353" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                         <connections>
@@ -83,20 +84,20 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2l6-ab-XQS" secondAttribute="trailing" id="xhY-0C-gpC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nnr-SV-drc"/>
                     <connections>
                         <outlet property="emailTextField" destination="jgf-tc-jIZ" id="Hcq-Mr-ox8"/>
                         <outlet property="passwordTextField" destination="DgM-cB-Urd" id="llY-Ly-LGe"/>
-                        <segue destination="Lp9-JF-zpV" kind="presentation" identifier="LoginSegue" id="NbH-XT-4Sk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34.782608695652179" y="97.767857142857139"/>
+            <point key="canvasLocation" x="1819" y="96"/>
         </scene>
         <!--Inicio View Controller-->
         <scene sceneID="Qiw-7o-Zay">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Lp9-JF-zpV" customClass="InicioViewController" customModule="Meals" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InicioVC" modalPresentationStyle="fullScreen" id="Lp9-JF-zpV" customClass="InicioViewController" customModule="Meals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6t8-HU-54K">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +110,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7y4-5D-IDh">
                                                 <rect key="frame" x="0.0" y="0.5" width="414" height="108"/>
-                                                <color key="tintColor" name="Background"/>
+                                                <color key="tintColor" name="MainIcon"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kiZ-MA-0G0" userLabel="Labels Stack View">
                                                 <rect key="frame" x="28" y="119" width="358" height="29"/>
@@ -183,7 +184,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Buttons"/>
+                                                        <color key="backgroundColor" name="Inicio Buttons"/>
                                                         <constraints>
                                                             <constraint firstItem="90f-ip-gFM" firstAttribute="leading" secondItem="tsS-KP-jVS" secondAttribute="leading" id="H96-tC-iXA"/>
                                                             <constraint firstItem="EB8-n2-79R" firstAttribute="centerX" secondItem="tsS-KP-jVS" secondAttribute="centerX" id="NUo-4Q-Pv0"/>
@@ -231,7 +232,7 @@
                                                                 <buttonConfiguration key="configuration" style="plain"/>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Buttons"/>
+                                                        <color key="backgroundColor" name="Inicio Buttons"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="h4J-Qi-QZ4" secondAttribute="trailing" id="6m7-wA-cyd"/>
                                                             <constraint firstAttribute="bottom" secondItem="h4J-Qi-QZ4" secondAttribute="bottom" id="BIx-zl-wVD"/>
@@ -287,7 +288,7 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Buttons"/>
+                                                        <color key="backgroundColor" name="Inicio Buttons"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="Kv9-Yg-Z1C" secondAttribute="trailing" id="2Nl-o5-XcE"/>
                                                             <constraint firstItem="njW-52-Wee" firstAttribute="centerX" secondItem="iff-J9-Uez" secondAttribute="centerX" id="4It-aD-7Hv"/>
@@ -333,9 +334,12 @@
                                                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="verMenuPressed:" destination="Lp9-JF-zpV" eventType="touchUpInside" id="1yd-3E-oBq"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Buttons"/>
+                                                        <color key="backgroundColor" name="Inicio Buttons"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="rJ9-je-0WI" secondAttribute="trailing" id="Al4-qu-sDZ"/>
                                                             <constraint firstItem="LKI-fB-4Yb" firstAttribute="centerX" secondItem="6Ti-ja-wA1" secondAttribute="centerX" id="DrL-I8-KkG"/>
@@ -372,13 +376,14 @@
                             <constraint firstItem="rto-MU-Jcl" firstAttribute="height" secondItem="6t8-HU-54K" secondAttribute="height" multiplier="0.85" id="uLt-a4-KyC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="QVC-xh-ezR"/>
                     <connections>
                         <segue destination="ngb-I9-lNq" kind="presentation" identifier="AgregarComidaSegue" id="KFZ-R3-Ewx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ift-sq-Lcq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900.00000000000011" y="95.758928571428569"/>
+            <point key="canvasLocation" x="2720.289855072464" y="95.758928571428569"/>
         </scene>
         <!--Agregar Comida View Controller-->
         <scene sceneID="5p4-Vi-BfA">
@@ -395,7 +400,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="331" height="245.5"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yj1-F9-8Ej">
-                                                <rect key="frame" x="0.0" y="61" width="16" height="184"/>
+                                                <rect key="frame" x="0.0" y="61.5" width="331" height="184"/>
+                                                <color key="tintColor" name="Text"/>
                                             </pickerView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g8W-VD-eYB">
                                                 <rect key="frame" x="0.0" y="27.5" width="331" height="34"/>
@@ -464,17 +470,18 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzz-65-XOO">
                                                 <rect key="frame" x="0.0" y="25.5" width="155.5" height="31"/>
                                                 <color key="backgroundColor" name="Buttons"/>
-                                                <color key="tintColor" name="Text"/>
+                                                <color key="tintColor" red="0.37647058820000001" green="0.3411764706" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Cancelar"/>
                                                 <connections>
+                                                    <action selector="cancelarPressed:" destination="ngb-I9-lNq" eventType="touchUpInside" id="1eD-e3-iUu"/>
                                                     <action selector="guardarPressed:" destination="ngb-I9-lNq" eventType="touchUpInside" id="huY-Q2-Unt"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhF-nX-XbP">
                                                 <rect key="frame" x="175.5" y="25.5" width="155.5" height="31"/>
                                                 <color key="backgroundColor" name="Buttons"/>
-                                                <color key="tintColor" name="Text"/>
+                                                <color key="tintColor" red="0.37647058820000001" green="0.3411764706" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Guardar"/>
                                                 <connections>
@@ -525,7 +532,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nlm-TL-tcO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1779.7101449275365" y="97.767857142857139"/>
+            <point key="canvasLocation" x="3600.0000000000005" y="97.767857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TBA-Af-coP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="AAk-9N-5yK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g5U-GU-8em">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cIS-Ls-g4q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ufc-95-9me" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="909" y="96"/>
         </scene>
     </scenes>
     <resources>
@@ -541,8 +566,14 @@
         <namedColor name="Elements">
             <color red="0.27500000596046448" green="0.3059999942779541" blue="0.18000000715255737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Inicio Buttons">
+            <color red="0.77600002288818359" green="0.85100001096725464" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="InicioBG">
             <color red="0.70999997854232788" green="0.80400002002716064" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainIcon">
+            <color red="0.98039215686274506" green="0.92156862745098034" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
             <color red="0.37599998712539673" green="0.34099999070167542" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
