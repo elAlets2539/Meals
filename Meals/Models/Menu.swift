@@ -9,18 +9,48 @@ import Foundation
 
 class Menu {
     
-    private var colacionesMat = [Comida]()
-    private var desayunos = [Comida]()
-    private var colacionesVesp = [Comida]()
-    private var comidas = [Comida]()
-    private var colacionesNoct = [Comida]()
-    private var cenas = [Comida]()
+    var colacionesMat = [Comida]()
+    var desayunos = [Comida]()
+    var colacionesVesp = [Comida]()
+    var comidas = [Comida]()
+    var colacionesNoct = [Comida]()
+    var cenas = [Comida]()
+    
+    static let menu = Menu()
     
     init () {
         
     }
     
-    public func agregarComida(tiempo: Tiempo, nombre: String, receta: Receta) {
+    func agregarComida(tiempo: Tiempo, nombre: String, receta: Receta) {
+        
+        let comida = Comida(nombre, receta, tiempo)
+        
+        switch tiempo {
+        case .colMat:
+            colacionesMat.append(comida)
+        case .desayuno:
+            desayunos.append(comida)
+        case .colVesp:
+            colacionesVesp.append(comida)
+        case .comida:
+            comidas.append(comida)
+        case .colNoct:
+            colacionesNoct.append(comida)
+        case .cena:
+            cenas.append(comida)
+        }
+        
+    }
+    
+    func resetMenu() {
+        
+        colacionesMat = []
+        desayunos = []
+        colacionesVesp = []
+        comidas = []
+        colacionesNoct = []
+        cenas = []
         
     }
     

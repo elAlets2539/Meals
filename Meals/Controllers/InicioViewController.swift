@@ -13,6 +13,12 @@ class InicioViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor(named: "Elements")
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let dataManager = DataManager()
+        dataManager.getComidasFromDB()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

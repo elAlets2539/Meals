@@ -9,12 +9,12 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
     
-    var colMatutina = ["a", "b"]
-    var desayunos = ["a", "b", "c"]
-    var colVespertina = ["a", "b", "c", "d"]
-    var comidas = ["a", "b", "c", "d", "e"]
-    var colNocturna = ["a", "b", "c", "d", "e", "f"]
-    var cenas = ["a", "b", "c", "d", "e", "f", "g"]
+    var colMatutina: [Comida] = []
+    var desayunos: [Comida] = []
+    var colVespertina: [Comida] = []
+    var comidas: [Comida] = []
+    var colNocturna: [Comida] = []
+    var cenas: [Comida] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,15 @@ class MenuTableViewController: UITableViewController {
 
         self.title = "Menú"
         self.tableView.backgroundColor = UIColor(named: "InicioBG")
+        
+        let menu = Menu.menu
+        
+        colMatutina = menu.colacionesMat
+        desayunos = menu.desayunos
+        colVespertina = menu.colacionesVesp
+        comidas = menu.comidas
+        colNocturna = menu.colacionesNoct
+        cenas = menu.cenas
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -67,7 +76,7 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath)
 
         var content = cell.defaultContentConfiguration()
-        content.text = arrays[indexPath.section][indexPath.row]
+        content.text = arrays[indexPath.section][indexPath.row].nombre
         
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor(named: "Inicio Buttons")

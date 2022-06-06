@@ -68,7 +68,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
             
             var ingredientes = [[String: Any]]()
             for insumo in receta.insumos {
-                ingredientes.append(receta.formatInsumo(insumo.key))
+                ingredientes.append(receta.formatInsumoToDict(insumo.key))
             }
 
             db.collection("users").document("\(User.id)").collection("menu").addDocument(data: ["nombre": nombre,

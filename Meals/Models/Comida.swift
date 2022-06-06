@@ -50,6 +50,7 @@ struct Ingrediente: Hashable {
     static func firebaseFormat(_ tipo: Tipo) -> String {
         
         switch tipo {
+            
         case .verdura:
             return "verdura"
         case .fruta:
@@ -64,6 +65,7 @@ struct Ingrediente: Hashable {
             return "leche"
         case .grasa:
             return "grasa"
+            
         }
         
     }
@@ -71,6 +73,7 @@ struct Ingrediente: Hashable {
     static func firebaseFormat(_ unidad: Unidad) -> String {
         
         switch unidad {
+            
         case .tz:
             return "tz"
         case .pza:
@@ -79,6 +82,51 @@ struct Ingrediente: Hashable {
             return "cdita"
         case .g:
             return "g"
+            
+        }
+        
+    }
+    
+    static func tipoFormat(_ tipo: String) -> Tipo {
+        
+        switch tipo {
+            
+        case "verdura":
+            return .verdura
+        case "fruta":
+            return .fruta
+        case "cereal":
+            return .cereal
+        case "leguminosa":
+            return .leguminosa
+        case "animal":
+            return .animal
+        case "leche":
+            return .leche
+        case "grasa":
+            return .grasa
+        default:
+            return .verdura
+            
+        }
+        
+    }
+    
+    static func unidadFormat(_ unidad: String) -> Unidad {
+        
+        switch unidad {
+            
+        case "tz":
+            return .tz
+        case "pza":
+            return .pza
+        case "cdita":
+            return .cdita
+        case "g":
+            return .g
+        default:
+            return .tz
+            
         }
         
     }
@@ -93,9 +141,9 @@ struct Receta {
         insumos = [Ingrediente : Int]()
     }
     
-    func formatInsumo(_ ingrediente: Ingrediente) -> [String: Any] {
+    func formatInsumoToDict(_ ingrediente: Ingrediente) -> [String : Any] {
         
-        var dict = [String: Any]()
+        var dict = [String : Any]()
 //        let keys = Array(insumos.keys)
         
 //        for key in keys {
@@ -113,6 +161,23 @@ struct Receta {
 //        }
         
         return dict
+        
+    }
+    
+    static func formatDictToInsumo(_ dict: [String : Any]) -> (Ingrediente, Int) {
+        
+        let nombre = dict["nombre"] as! String
+        let tipoStr = dict["tipo"] as! String
+        let porcion = dict["porcion"] as! Int
+        let unidadStr = dict["unidad"] as! String
+        
+        let tipo = Ingrediente.tipoFormat(tipoStr)
+        let unidad = Ingrediente.unidadFormat(unidadStr)
+        
+        let ingrediente = Ingrediente(nombre, tipo, porcion, unidad)
+        let insumo = (ingrediente, (dict["cantidad"] as! Int))
+        
+        return insumo
         
     }
     
