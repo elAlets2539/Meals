@@ -54,6 +54,29 @@ class Menu {
         
     }
     
+    func filterResults(_ text: String) -> [String] {
+        
+        var results = [String]()
+        
+        let comidasArray = [colacionesMat, desayunos, colacionesVesp, comidas, colacionesNoct, cenas]
+        
+        for array in comidasArray {
+            
+            for comida in array {
+                
+//                if comida.nombre.contains(text) {
+                if let _ = comida.nombre.range(of: text, options: .caseInsensitive) {
+                    results.append(comida.nombre)
+                }
+                
+            }
+            
+        }
+        
+        return results
+        
+    }
+    
 //    public func sugerencia(tiempo: Tiempo) -> Comida {
 //
 //        var sugerencia: Comida

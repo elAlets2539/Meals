@@ -22,12 +22,14 @@ class InicioViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Atrás", style: .plain, target: nil, action: nil)
     }
     
     @IBAction func registrarComidaPressed(_ sender: UIButton) {
         
-        print("Oi")
+        let registrarComdiaVC = RegistrarComidaViewController()
+        registrarComdiaVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(registrarComdiaVC, animated: true)
         
     }
     

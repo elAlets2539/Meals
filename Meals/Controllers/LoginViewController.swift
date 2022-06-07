@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
                 } else {
                     User.id = Auth.auth().currentUser!.uid
 //                    print(User.id)
-                    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Salir", style: .plain, target: nil, action: nil)
                     let inicioVC = self.storyboard?.instantiateViewController(withIdentifier: "InicioVC") as! InicioViewController
                     self.navigationController?.pushViewController(inicioVC, animated: true)
                 }
