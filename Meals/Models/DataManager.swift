@@ -12,6 +12,12 @@ struct DataManager {
     
     let db = Firestore.firestore()
     let menu = Menu.menu
+    let date: String = {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: date)
+    }()
 
     init() {
         
@@ -96,8 +102,14 @@ struct DataManager {
                     let documents = snap.documents
                     
                     if !documents.isEmpty {
+                        
                         let data = documents[0].data()
-                        User.comidaPendiente = data["comidaPendiente"] as! String
+                        let comidaPendiente = data["comidaPendiente"] as! String
+                        let lastUpdate = data["dia"] as! String
+                        
+                        User.comidaPendiente = (lastUpdate != date) ? "Colación matutina" : comidaPendiente
+                        User.lastUpdateDate = lastUpdate
+                        
                     }
                     
                     DispatchQueue.main.async {
@@ -126,50 +138,47 @@ struct DataManager {
     
     func registrarComida() {
         
-        let date = getDate()
         var documentID = ""
+        let siguienteComida = (User.comidaPendiente != "Ninguna") ? User.siguienteComida() : "Ninguna"
         
         db.collection("users").document(User.id).collection("diario").getDocuments { snapshot, error in
-
+            
             if error != nil {
                 print("Sepa la bola qué pasó, \(error!)")
             } else {
-
+                
                 if let snap = snapshot, !snap.documents.isEmpty {
                     
                     documentID = snap.documents.first!.documentID
-
+                    
                 }
                 
                 if documentID != "" {
                     
                     db.collection("users").document(User.id).collection("diario").document(documentID).updateData(["dia" : date,
-                                                                                                                   "comidaPendiente" : User.siguienteComida])
+                                                                                                                   "comidaPendiente" : siguienteComida]) { error in
+                        if error != nil {
+                            print("ora, \(error!)")
+                        }
+                        
+                    }
                     
                 } else {
-                 
+                    
                     db.collection("users").document(User.id).collection("diario").addDocument(data: ["dia" : date,
-                                                                                                     "comidaPendiente" : User.siguienteComida]) { error in
+                                                                                                     "comidaPendiente" : siguienteComida]) { error in
                         
                         self.catchError(error)
                         
                     }
                     
                 }
+                
+                User.comidaPendiente = siguienteComida
 
             }
 
         }
-        
-    }
-    
-    private func getDate() -> String {
-        
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        
-        return dateFormatter.string(from: date)
         
     }
     

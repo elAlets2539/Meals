@@ -11,7 +11,9 @@ struct User {
  
     static var id: String = ""
     static var comidaPendiente = "Colación matutina"
-    static var siguienteComida: String = {
+    static var lastUpdateDate = ""
+    
+    static func siguienteComida() -> String {
         
         switch comidaPendiente {
             
@@ -32,6 +34,6 @@ struct User {
             
         }
         
-    }()
+    }
     
 }

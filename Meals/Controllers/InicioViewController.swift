@@ -28,6 +28,7 @@ class InicioViewController: UIViewController {
         let dataManager = DataManager()
         dataManager.getDiarioFromDB(comidaPendienteLabel)
         dataManager.getComidasFromDB()
+        print("ahora")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -145,9 +145,9 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
         let alert = UIAlertController(title: "¿Registrar \(results[indexPath.row])?", message: "", preferredStyle: .alert)
         
         let aceptar = UIAlertAction(title: "Aceptar", style: .default) { action in
-            print("Aceptado")
             let dataManager = DataManager()
             dataManager.registrarComida()
+            self.dismiss(animated: true)
         }
         
         let cancelar = UIAlertAction(title: "Cancelar", style: .default) { action in
