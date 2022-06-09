@@ -18,7 +18,7 @@ class RegistrarComidaViewController: UIViewController {
     
     var tableHeight: NSLayoutConstraint?
     
-    var results = [String]()
+    var results = [(String, String)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,8 @@ class RegistrarComidaViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8).isActive = true
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchCell")
+        tableView.register(RegistrarComidaTableViewCell.self, forCellReuseIdentifier: "SearchCell")
+        tableView.rowHeight = view.bounds.height * 0.065
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -125,14 +126,16 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! RegistrarComidaTableViewCell
         
-        var content = cell.defaultContentConfiguration()
-        content.text = results[indexPath.row]
+//        var content = cell.defaultContentConfiguration()
+//        content.text = results[indexPath.row]
         
-        cell.backgroundColor = view.backgroundColor
+//        cell.backgroundColor = view.backgroundColor
         
-        cell.contentConfiguration = content
+//        cell.contentConfiguration = content
+        cell.nombreLabel.text = results[indexPath.row].0
+        cell.tiempoLabel.text = results[indexPath.row].1
         
         return cell
         
@@ -142,7 +145,7 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let alert = UIAlertController(title: "¿Registrar \(results[indexPath.row])?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "¿Registrar \(results[indexPath.row].0)?", message: "", preferredStyle: .alert)
         
         let aceptar = UIAlertAction(title: "Aceptar", style: .default) { action in
             let dataManager = DataManager()

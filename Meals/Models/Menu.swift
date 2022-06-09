@@ -54,9 +54,9 @@ class Menu {
         
     }
     
-    func filterResults(_ text: String) -> [String] {
+    func filterResults(_ text: String) -> [(String, String)] {
         
-        var results = [String]()
+        var results = [(String, String)]()
         
         let comidasArray = [colacionesMat, desayunos, colacionesVesp, comidas, colacionesNoct, cenas]
         
@@ -66,7 +66,7 @@ class Menu {
                 
 //                if comida.nombre.contains(text) {
                 if let _ = comida.nombre.range(of: text, options: .caseInsensitive) {
-                    results.append(comida.nombre)
+                    results.append((comida.nombre, comida.tiempo.description))
                 }
                 
             }

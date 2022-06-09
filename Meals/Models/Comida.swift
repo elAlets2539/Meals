@@ -8,12 +8,33 @@
 import Foundation
 
 enum Tiempo {
+    
     case colMat
     case desayuno
     case colVesp
     case comida
     case colNoct
     case cena
+    
+    var description : String {
+        
+        switch self {
+        case .colMat:
+            return "Colación matutina"
+        case .desayuno:
+            return "Desayuno"
+        case .colVesp:
+            return "Colación vespertina"
+        case .comida:
+            return "Comida"
+        case .colNoct:
+            return "Colación nocturna"
+        case .cena:
+            return "Cena"
+        }
+        
+    }
+    
 }
 
 struct Ingrediente: Hashable {
