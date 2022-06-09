@@ -128,12 +128,6 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath) as! RegistrarComidaTableViewCell
         
-//        var content = cell.defaultContentConfiguration()
-//        content.text = results[indexPath.row]
-        
-//        cell.backgroundColor = view.backgroundColor
-        
-//        cell.contentConfiguration = content
         cell.nombreLabel.text = results[indexPath.row].0
         cell.tiempoLabel.text = results[indexPath.row].1
         
