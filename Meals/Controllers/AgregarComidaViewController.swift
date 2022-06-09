@@ -6,9 +6,11 @@
 //
 
 import UIKit
-import Firebase
 
 class AgregarComidaViewController: UIViewController, PopupDelegate {
+    
+    @IBOutlet weak var cancelarButton: UIButton!
+    @IBOutlet weak var guardarButton: UIButton!
     
     let tiemposTitles = ["Colación matutina",
                          "Desayuno",
@@ -17,14 +19,19 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
                          "Colación nocturna",
                          "Cena"]
     var tiempoSeleccionado = "Colación matutina"
-//    var ingredientes = [Ingrediente]()
+
     var receta = Receta()
+    
+    enum Modo {
+        case agregar
+        case registrar
+    }
+    
+    var modo: Modo = .agregar
     
     @IBOutlet weak var nombreTextField: UITextField!
     @IBOutlet weak var tiempoPicker: UIPickerView!
     @IBOutlet weak var ingredientesTableView: UITableView!
-    
-    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +53,9 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
         nombreTextField.backgroundColor = UIColor(named: "Element Bg Sand")
         
+        cancelarButton.layer.cornerRadius = 20
+        guardarButton.layer.cornerRadius = 20
+        
     }
     
     @IBAction func addIngredientePressed(_ sender: UIButton) {
@@ -66,20 +76,31 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
         if nombre != "" {
             
-            var ingredientes = [[String: Any]]()
-            for insumo in receta.insumos {
-                ingredientes.append(receta.formatInsumoToDict(insumo.key))
-            }
-
-            db.collection("users").document("\(User.id)").collection("menu").addDocument(data: ["nombre": nombre,
-                                                     "tiempo": tiempoSeleccionado,
-                                                     "ingredientes": ingredientes]) { error in
-                if let e = error {
-                    print("There was an issue saving data to firestore, \(e)")
-                } else {
-                    print("Succesfully saved data.")
-                    self.dismiss(animated: true)
+            let dataManager = DataManager()
+            
+            switch modo {
+                
+            case .agregar:
+                
+                var ingredientes = [[String: Any]]()
+                for insumo in receta.insumos {
+                    ingredientes.append(receta.formatInsumoToDict(insumo.key))
                 }
+
+                dataManager.agregarComida(nombre, tiempoSeleccionado, ingredientes)
+                
+                self.dismiss(animated: true)
+                
+                break
+                
+            case .registrar:
+                
+                dataManager.registrarComida()
+                
+                self.dismiss(animated: true)
+                
+                break
+            
             }
 
         }
@@ -92,7 +113,6 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
     
     func ingredienteRegistrado(nombre: String, tipo: Ingrediente.Tipo, porcion: Int, unidad: Ingrediente.Unidad, cantidad: Int) {
         let ingrediente = Ingrediente(nombre, tipo, porcion, unidad)
-//        ingredientes.append(ingrediente)
         receta.insumos[ingrediente] = cantidad
         self.ingredientesTableView.reloadData()
     }
@@ -124,7 +144,6 @@ extension AgregarComidaViewController: UIPickerViewDelegate, UIPickerViewDataSou
 extension AgregarComidaViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return ingredientes.count
         return receta.insumos.count
     }
     
@@ -135,7 +154,6 @@ extension AgregarComidaViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = ingredientesTableView.dequeueReusableCell(withIdentifier: "IngredienteCell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-//        content.text = ingredientes[indexPath.row].nombre
         content.text = keysArray[indexPath.row].nombre
         cell.contentConfiguration = content
         

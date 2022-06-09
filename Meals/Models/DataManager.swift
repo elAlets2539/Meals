@@ -83,4 +83,104 @@ struct DataManager {
         
     }
     
+    func getDiarioFromDB(_ label: UILabel) {
+        
+        db.collection("users").document(User.id).collection("diario").getDocuments { snapshot, error in
+            
+            if error != nil {
+                print("Sepa la bola qué pasó, \(error!)")
+            } else {
+                
+                if let snap = snapshot {
+                    
+                    let documents = snap.documents
+                    
+                    if !documents.isEmpty {
+                        let data = documents[0].data()
+                        User.comidaPendiente = data["comidaPendiente"] as! String
+                    }
+                    
+                    DispatchQueue.main.async {
+                        label.text = User.comidaPendiente
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func agregarComida(_ nombre: String, _ tiempo: String, _ ingredientes: [[String: Any]]) {
+        
+        db.collection("users").document(User.id).collection("menu").addDocument(data: ["nombre": nombre,
+                                                 "tiempo": tiempo,
+                                                 "ingredientes": ingredientes]) { error in
+            
+            self.catchError(error)
+            
+        }
+        
+    }
+    
+    func registrarComida() {
+        
+        let date = getDate()
+        var documentID = ""
+        
+        db.collection("users").document(User.id).collection("diario").getDocuments { snapshot, error in
+
+            if error != nil {
+                print("Sepa la bola qué pasó, \(error!)")
+            } else {
+
+                if let snap = snapshot, !snap.documents.isEmpty {
+                    
+                    documentID = snap.documents.first!.documentID
+
+                }
+                
+                if documentID != "" {
+                    
+                    db.collection("users").document(User.id).collection("diario").document(documentID).updateData(["dia" : date,
+                                                                                                                   "comidaPendiente" : User.siguienteComida])
+                    
+                } else {
+                 
+                    db.collection("users").document(User.id).collection("diario").addDocument(data: ["dia" : date,
+                                                                                                     "comidaPendiente" : User.siguienteComida]) { error in
+                        
+                        self.catchError(error)
+                        
+                    }
+                    
+                }
+
+            }
+
+        }
+        
+    }
+    
+    private func getDate() -> String {
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        return dateFormatter.string(from: date)
+        
+    }
+    
+    private func catchError(_ error: Error?) {
+        
+        if let e = error {
+            print("There was an issue saving data to firestore, \(e)")
+        } else {
+            print("Succesfully saved data.")
+        }
+        
+    }
+    
 }

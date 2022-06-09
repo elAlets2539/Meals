@@ -9,20 +9,38 @@ import UIKit
 
 class InicioViewController: UIViewController {
 
+    @IBOutlet weak var comidaPendienteLabel: UILabel!
+    @IBOutlet weak var registrarView: UIView!
+    @IBOutlet weak var sugerenciaView: UIView!
+    @IBOutlet weak var agregarView: UIView!
+    @IBOutlet weak var menuView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.navigationBar.tintColor = UIColor(named: "Elements")
         
+        setupViews()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let dataManager = DataManager()
+        dataManager.getDiarioFromDB(comidaPendienteLabel)
         dataManager.getComidasFromDB()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Atrás", style: .plain, target: nil, action: nil)
+    }
+    
+    func setupViews() {
+        
+        registrarView.layer.cornerRadius = 20
+        sugerenciaView.layer.cornerRadius = 20
+        agregarView.layer.cornerRadius = 20
+        menuView.layer.cornerRadius = 20
+        
     }
     
     @IBAction func registrarComidaPressed(_ sender: UIButton) {
@@ -35,7 +53,10 @@ class InicioViewController: UIViewController {
     
     @IBAction func agregarComidaPressed(_ sender: UIButton) {
         
-        self.performSegue(withIdentifier: "AgregarComidaSegue", sender: self)
+//        self.performSegue(withIdentifier: "AgregarComidaSegue", sender: self)
+        let agregarComidaVC = self.storyboard?.instantiateViewController(withIdentifier: "AgregarComidaVC") as! AgregarComidaViewController
+        agregarComidaVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(agregarComidaVC, animated: true, completion: nil)
         
     }
     
