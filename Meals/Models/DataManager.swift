@@ -113,7 +113,7 @@ struct DataManager {
                     }
                     
                     DispatchQueue.main.async {
-                        label.text = User.comidaPendiente
+                        label.text = "Siguiente comida: \(User.comidaPendiente)"
                     }
                     
                 }

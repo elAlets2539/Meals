@@ -21,6 +21,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
     var tiempoSeleccionado = "Colación matutina"
 
     var receta = Receta()
+    let dataManager = DataManager()
     
     enum Modo {
         case agregar
@@ -76,18 +77,11 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
         if nombre != "" {
             
-            let dataManager = DataManager()
-            
             switch modo {
                 
             case .agregar:
                 
-                var ingredientes = [[String: Any]]()
-                for insumo in receta.insumos {
-                    ingredientes.append(receta.formatInsumoToDict(insumo.key))
-                }
-
-                dataManager.agregarComida(nombre, tiempoSeleccionado, ingredientes)
+                agregarComida(nombre)
                 
                 self.dismiss(animated: true)
                 
@@ -96,14 +90,46 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
             case .registrar:
                 
                 dataManager.registrarComida()
+                alertAgregarAlMenu(nombre)
                 
-                self.dismiss(animated: true)
+//                self.dismiss(animated: true)
                 
                 break
             
             }
 
         }
+        
+    }
+    
+    func agregarComida(_ nombre: String) {
+        
+        var ingredientes = [[String: Any]]()
+        for insumo in receta.insumos {
+            ingredientes.append(receta.formatInsumoToDict(insumo.key))
+        }
+
+        dataManager.agregarComida(nombre, tiempoSeleccionado, ingredientes)
+        
+    }
+    
+    func alertAgregarAlMenu(_ nombre: String) {
+        
+        let alert = UIAlertController(title: "¿Agregar \(nombre) al menú?", message: "", preferredStyle: .alert)
+        
+        let aceptar = UIAlertAction(title: "Aceptar", style: .default) { action in
+            self.agregarComida(nombre)
+            self.dismiss(animated: true)
+        }
+        
+        let cancelar = UIAlertAction(title: "Cancelar", style: .default) { action in
+            self.dismiss(animated: true)
+        }
+
+        alert.addAction(cancelar)
+        alert.addAction(aceptar)
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
