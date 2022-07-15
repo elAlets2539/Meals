@@ -10,6 +10,15 @@ import UIKit
 class InicioViewController: UIViewController {
 
     @IBOutlet weak var comidaPendienteLabel: UILabel!
+    
+    @IBOutlet weak var grupo1Label: UILabel!
+    @IBOutlet weak var grupo2Label: UILabel!
+    @IBOutlet weak var grupo3Label: UILabel!
+    @IBOutlet weak var grupo4Label: UILabel!
+    @IBOutlet weak var grupo5Label: UILabel!
+    @IBOutlet weak var grupo6Label: UILabel!
+    @IBOutlet weak var grupo7Label: UILabel!
+    
     @IBOutlet weak var registrarView: UIView!
     @IBOutlet weak var sugerenciaView: UIView!
     @IBOutlet weak var agregarView: UIView!
@@ -24,12 +33,14 @@ class InicioViewController: UIViewController {
         
     }
     
+    // Obtener la siguiente comida pendiente y obtener todas las comidas del menú de firebase.
     override func viewWillAppear(_ animated: Bool) {
         let dataManager = DataManager()
         dataManager.getDiarioFromDB(comidaPendienteLabel)
         dataManager.getComidasFromDB()
     }
     
+    // Agregar botón de navegación para regresar a esta pantalla.
     override func viewWillDisappear(_ animated: Bool) {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Atrás", style: .plain, target: nil, action: nil)
     }
@@ -43,6 +54,7 @@ class InicioViewController: UIViewController {
         
     }
     
+    // Ir a pantalla de Registrar comida.
     @IBAction func registrarComidaPressed(_ sender: UIButton) {
         
         let registrarComdiaVC = RegistrarComidaViewController()
@@ -51,6 +63,7 @@ class InicioViewController: UIViewController {
         
     }
     
+    // Ir a pantalla de Agregar comida.
     @IBAction func agregarComidaPressed(_ sender: UIButton) {
         
 //        self.performSegue(withIdentifier: "AgregarComidaSegue", sender: self)
@@ -60,6 +73,7 @@ class InicioViewController: UIViewController {
         
     }
     
+    // Ir a pantalla del menú.
     @IBAction func verMenuPressed(_ sender: UIButton) {
         
         let menuTableViewController = MenuTableViewController()
@@ -68,15 +82,5 @@ class InicioViewController: UIViewController {
         //self.present(menuTableViewController, animated: true)
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

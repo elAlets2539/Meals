@@ -16,6 +16,35 @@ class Menu {
     var colacionesNoct = [Comida]()
     var cenas = [Comida]()
     
+    var porciones = [Tiempo.colMat : [Ingrediente.Tipo.fruta : 1,
+                                      Ingrediente.Tipo.cereal : 1,
+                                      Ingrediente.Tipo.leche : 1,
+                                      Ingrediente.Tipo.grasa : 1],
+                     
+                     Tiempo.desayuno : [Ingrediente.Tipo.fruta : 1,
+                                        Ingrediente.Tipo.cereal : 2,
+                                        Ingrediente.Tipo.animal : 2,
+                                        Ingrediente.Tipo.grasa : 1],
+                     
+                     Tiempo.colVesp : [Ingrediente.Tipo.verdura : 1],
+                     
+                     Tiempo.comida : [Ingrediente.Tipo.verdura : 1,
+                                      Ingrediente.Tipo.cereal : 3,
+                                      Ingrediente.Tipo.leguminosa : 1,
+                                      Ingrediente.Tipo.animal : 2,
+                                      Ingrediente.Tipo.grasa : 1],
+                     
+                     Tiempo.colNoct : [Ingrediente.Tipo.fruta : 1,
+                                       Ingrediente.Tipo.cereal : 1],
+                     
+                     Tiempo.cena : [Ingrediente.Tipo.verdura : 1,
+                                    Ingrediente.Tipo.cereal : 2,
+                                    Ingrediente.Tipo.animal : 2,
+                                    Ingrediente.Tipo.leche : 1,
+                                    Ingrediente.Tipo.grasa : 1],
+    ]
+    
+    // Singleton
     static let menu = Menu()
     
     init () {
@@ -54,6 +83,7 @@ class Menu {
         
     }
     
+    // Filtro para obtener el nombre y el tiempo de una comida buscada.
     func filterResults(_ text: String) -> [(String, String)] {
         
         var results = [(String, String)]()
@@ -64,7 +94,6 @@ class Menu {
             
             for comida in array {
                 
-//                if comida.nombre.contains(text) {
                 if let _ = comida.nombre.range(of: text, options: .caseInsensitive) {
                     results.append((comida.nombre, comida.tiempo.description))
                 }
@@ -74,6 +103,12 @@ class Menu {
         }
         
         return results
+        
+    }
+    
+    func getPorciones(_ tiempo: Tiempo) -> [Ingrediente.Tipo : Int] {
+        
+        return porciones[tiempo]!
         
     }
     
