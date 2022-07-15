@@ -36,7 +36,10 @@ class InicioViewController: UIViewController {
     // Obtener la siguiente comida pendiente y obtener todas las comidas del menú de firebase.
     override func viewWillAppear(_ animated: Bool) {
         let dataManager = DataManager()
-        dataManager.getDiarioFromDB(comidaPendienteLabel)
+        dataManager.getDiarioFromDB() {
+            self.comidaPendienteLabel.text = "Siguiente comida: \(User.comidaPendiente)"
+            print("Hola")
+        }
         dataManager.getComidasFromDB()
     }
     

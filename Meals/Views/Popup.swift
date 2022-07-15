@@ -78,17 +78,17 @@ class Popup: UIView {
         button.setTitle("Unidad", for: .normal)
         button.setTitleColor(UIColor(named: "Text"), for: .normal)
         
-        let taza = UIAction(title: "tz") { (action) in
-            button.setTitle("tz", for: .normal)
+        let taza = UIAction(title: K.Ingredientes.Unidades.tz) { (action) in
+            button.setTitle(K.Ingredientes.Unidades.tz, for: .normal)
         }
-        let gramo = UIAction(title: "g") { (action) in
-            button.setTitle("g", for: .normal)
+        let gramo = UIAction(title: K.Ingredientes.Unidades.g) { (action) in
+            button.setTitle(K.Ingredientes.Unidades.g, for: .normal)
         }
-        let pieza = UIAction(title: "pza") { (action) in
-            button.setTitle("pza", for: .normal)
+        let pieza = UIAction(title: K.Ingredientes.Unidades.pza) { (action) in
+            button.setTitle(K.Ingredientes.Unidades.pza, for: .normal)
         }
-        let cucharadita = UIAction(title: "cdita") { (action) in
-            button.setTitle("cdita", for: .normal)
+        let cucharadita = UIAction(title: K.Ingredientes.Unidades.cdita) { (action) in
+            button.setTitle(K.Ingredientes.Unidades.cdita, for: .normal)
         }
         let tipoMenu = UIMenu(title: "Unidad", options: .displayInline, children: [taza, gramo, pieza, cucharadita])
         button.menu = tipoMenu
@@ -308,16 +308,16 @@ class Popup: UIView {
         
         switch unidadButton.titleLabel!.text! {
             
-        case "tz":
+        case K.Ingredientes.Unidades.tz:
             unidad = .tz
             break
-        case "pza":
+        case K.Ingredientes.Unidades.pza:
             unidad = .pza
             break
-        case "cdita":
+        case K.Ingredientes.Unidades.cdita:
             unidad = .cdita
             break
-        case "g":
+        case K.Ingredientes.Unidades.g:
             unidad = .g
             break
         default:

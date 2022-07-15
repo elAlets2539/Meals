@@ -47,22 +47,22 @@ struct DataManager {
                         
                         switch tiempoString {
                             
-                        case "Colación matutina":
+                        case K.Tiempos.colMat:
                             tiempo = Tiempo.colMat
                             break
-                        case "Desayuno":
+                        case K.Tiempos.desayuno:
                             tiempo = Tiempo.desayuno
                             break
-                        case "Colación vespertina":
+                        case K.Tiempos.colVesp:
                             tiempo = Tiempo.colVesp
                             break
-                        case "Comida":
+                        case K.Tiempos.comida:
                             tiempo = Tiempo.comida
                             break
-                        case "Colación nocturna":
+                        case K.Tiempos.colNoct:
                             tiempo = Tiempo.colNoct
                             break
-                        case "Cena":
+                        case K.Tiempos.cena:
                             tiempo = Tiempo.cena
                             break
                         default:
@@ -89,7 +89,7 @@ struct DataManager {
         
     }
     
-    func getDiarioFromDB(_ label: UILabel) {
+    func getDiarioFromDB(completion:@escaping () -> Void) {
         
         db.collection("users").document(User.id).collection("diario").getDocuments { snapshot, error in
             
@@ -113,7 +113,7 @@ struct DataManager {
                     }
                     
                     DispatchQueue.main.async {
-                        label.text = "Siguiente comida: \(User.comidaPendiente)"
+                        completion()
                     }
                     
                 }

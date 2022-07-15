@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D764303E30C600B082BF9D7 /* Pods_Meals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 960518ABF2395C97ACC0D946 /* Pods_Meals.framework */; };
+		0F1AA29A2881EA8000AF2B9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1AA2992881EA8000AF2B9B /* Constants.swift */; };
 		0F28625A284684720032866A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F286259284684720032866A /* User.swift */; };
 		0F2A2A1B284AC45400BF69A6 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A2A1A284AC45400BF69A6 /* MenuTableViewController.swift */; };
 		0F2A2A1D284AC82300BF69A6 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A2A1C284AC82300BF69A6 /* MenuTableViewCell.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F1AA2992881EA8000AF2B9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0F286258284678340032866A /* Meals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F286259284684720032866A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F2A2A1A284AC45400BF69A6 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				0F69A43B284137FC00F17568 /* Meals.entitlements */,
 				0F69A427284137F100F17568 /* AppDelegate.swift */,
 				0F69A429284137F100F17568 /* SceneDelegate.swift */,
+				0F1AA2992881EA8000AF2B9B /* Constants.swift */,
 				0F69A4402841385600F17568 /* Models */,
 				0F69A4412841386200F17568 /* Views */,
 				0F69A4422841387700F17568 /* Controllers */,
@@ -271,6 +274,7 @@
 				0F2A2A21284E722F00BF69A6 /* RegistrarComidaViewController.swift in Sources */,
 				0F2A2A1B284AC45400BF69A6 /* MenuTableViewController.swift in Sources */,
 				0F2CB04228451C8B0024BE19 /* Popup.swift in Sources */,
+				0F1AA29A2881EA8000AF2B9B /* Constants.swift in Sources */,
 				0FA8CCD3284179E300D1280D /* InicioViewController.swift in Sources */,
 				0F69A428284137F100F17568 /* AppDelegate.swift in Sources */,
 				0F28625A284684720032866A /* User.swift in Sources */,

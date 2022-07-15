@@ -12,13 +12,13 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
     @IBOutlet weak var cancelarButton: UIButton!
     @IBOutlet weak var guardarButton: UIButton!
     
-    let tiemposTitles = ["Colación matutina",
-                         "Desayuno",
-                         "Colación vespertina",
-                         "Comida",
-                         "Colación nocturna",
-                         "Cena"]
-    var tiempoSeleccionado = "Colación matutina"
+    let tiemposTitles = [K.Tiempos.colMat,
+                         K.Tiempos.desayuno,
+                         K.Tiempos.colVesp,
+                         K.Tiempos.comida,
+                         K.Tiempos.colNoct,
+                         K.Tiempos.cena]
+    var tiempoSeleccionado = K.Tiempos.colMat
 
     var receta = Receta()
     let dataManager = DataManager()

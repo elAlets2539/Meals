@@ -10,27 +10,27 @@ import Foundation
 struct User {
  
     static var id: String = ""
-    static var comidaPendiente = "Colación matutina"
+    static var comidaPendiente = K.Tiempos.colMat
     static var lastUpdateDate = ""
     
     static func siguienteComida() -> String {
         
         switch comidaPendiente {
             
-        case "Colación matutina":
-            return "Desayuno"
-        case "Desayuno":
-            return "Colación vespertina"
-        case "Colación vespertina":
-            return "Comida"
-        case "Comida":
-            return "Colación nocturna"
-        case "Colación nocturna":
-            return "Cena"
-        case "Cena":
+        case K.Tiempos.colMat:
+            return K.Tiempos.desayuno
+        case K.Tiempos.desayuno:
+            return K.Tiempos.colVesp
+        case K.Tiempos.colVesp:
+            return K.Tiempos.comida
+        case K.Tiempos.comida:
+            return K.Tiempos.colNoct
+        case K.Tiempos.colNoct:
+            return K.Tiempos.cena
+        case K.Tiempos.cena:
             return "Ninguna"
         default:
-            return "Colación matutina"
+            return K.Tiempos.colMat
             
         }
         

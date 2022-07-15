@@ -20,17 +20,17 @@ enum Tiempo {
         
         switch self {
         case .colMat:
-            return "Colación matutina"
+            return K.Tiempos.colMat
         case .desayuno:
-            return "Desayuno"
+            return K.Tiempos.desayuno
         case .colVesp:
-            return "Colación vespertina"
+            return K.Tiempos.colVesp
         case .comida:
-            return "Comida"
+            return K.Tiempos.comida
         case .colNoct:
-            return "Colación nocturna"
+            return K.Tiempos.colNoct
         case .cena:
-            return "Cena"
+            return K.Tiempos.cena
         }
         
     }
@@ -73,19 +73,19 @@ struct Ingrediente: Hashable {
         switch tipo {
             
         case .verdura:
-            return "verdura"
+            return K.Ingredientes.Tipos.verdura
         case .fruta:
-            return "fruta"
+            return K.Ingredientes.Tipos.fruta
         case .cereal:
-            return "cereal"
+            return K.Ingredientes.Tipos.cereal
         case .leguminosa:
-            return "leguminosa"
+            return K.Ingredientes.Tipos.leguminosa
         case .animal:
-            return "animal"
+            return K.Ingredientes.Tipos.animal
         case .leche:
-            return "leche"
+            return K.Ingredientes.Tipos.leche
         case .grasa:
-            return "grasa"
+            return K.Ingredientes.Tipos.grasa
             
         }
         
@@ -96,13 +96,13 @@ struct Ingrediente: Hashable {
         switch unidad {
             
         case .tz:
-            return "tz"
+            return K.Ingredientes.Unidades.tz
         case .pza:
-            return "pza"
+            return K.Ingredientes.Unidades.pza
         case .cdita:
-            return "cdita"
+            return K.Ingredientes.Unidades.cdita
         case .g:
-            return "g"
+            return K.Ingredientes.Unidades.g
             
         }
         
@@ -112,19 +112,19 @@ struct Ingrediente: Hashable {
         
         switch tipo {
             
-        case "verdura":
+        case K.Ingredientes.Tipos.verdura:
             return .verdura
-        case "fruta":
+        case K.Ingredientes.Tipos.fruta:
             return .fruta
-        case "cereal":
+        case K.Ingredientes.Tipos.cereal:
             return .cereal
-        case "leguminosa":
+        case K.Ingredientes.Tipos.leguminosa:
             return .leguminosa
-        case "animal":
+        case K.Ingredientes.Tipos.animal:
             return .animal
-        case "leche":
+        case K.Ingredientes.Tipos.leche:
             return .leche
-        case "grasa":
+        case K.Ingredientes.Tipos.grasa:
             return .grasa
         default:
             return .verdura
@@ -137,13 +137,13 @@ struct Ingrediente: Hashable {
         
         switch unidad {
             
-        case "tz":
+        case K.Ingredientes.Unidades.tz:
             return .tz
-        case "pza":
+        case K.Ingredientes.Unidades.pza:
             return .pza
-        case "cdita":
+        case K.Ingredientes.Unidades.cdita:
             return .cdita
-        case "g":
+        case K.Ingredientes.Unidades.g:
             return .g
         default:
             return .tz
