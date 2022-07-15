@@ -24,6 +24,8 @@ class InicioViewController: UIViewController {
     @IBOutlet weak var agregarView: UIView!
     @IBOutlet weak var menuView: UIView!
     
+    let menu = Menu.menu
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,12 +37,18 @@ class InicioViewController: UIViewController {
     
     // Obtener la siguiente comida pendiente y obtener todas las comidas del menú de firebase.
     override func viewWillAppear(_ animated: Bool) {
+        
         let dataManager = DataManager()
-        dataManager.getDiarioFromDB() {
+        
+        dataManager.getDiarioFromDB() { [self] in
+            
             self.comidaPendienteLabel.text = "Siguiente comida: \(User.comidaPendiente)"
-            print("Hola")
+            setPorciones(User.comidaPendiente)
+            
         }
+        
         dataManager.getComidasFromDB()
+        
     }
     
     // Agregar botón de navegación para regresar a esta pantalla.
@@ -57,6 +65,61 @@ class InicioViewController: UIViewController {
         
     }
     
+    // Preparar labels de acuerdo con las porciones a consumir.
+    func setPorciones(_ comida: String) {
+        
+        if comida != "Ninguna" {
+         
+            // Contar las diferentes porciones para elegir en cuáles labels colocarlas (para estar centradas)
+            let porciones = menu.getPorciones(User.comidaPendiente)
+            let grupos = [grupo1Label, grupo2Label, grupo3Label, grupo4Label, grupo5Label, grupo6Label, grupo7Label]
+            var index = 0
+            
+            switch porciones.count {
+            case 1, 2:
+                index = 2
+            case 3, 4:
+                index = 1
+            default:
+                index = 0
+            }
+            
+            // Limpiar labels
+            for grupo in grupos {
+                grupo?.text = ""
+            }
+            
+            // Preparar texto de cada label
+            for porcion in porciones {
+                
+                var emoji = ""
+                
+                switch porcion.key.description {
+                case K.Ingredientes.Tipos.verdura: emoji = "🥦"
+                case K.Ingredientes.Tipos.fruta: emoji = "🍎"
+                case K.Ingredientes.Tipos.cereal: emoji = "🍞"
+                case K.Ingredientes.Tipos.leguminosa: emoji = "🫘"
+                case K.Ingredientes.Tipos.animal: emoji = "🐮"
+                case K.Ingredientes.Tipos.leche: emoji = "🥛"
+                case K.Ingredientes.Tipos.grasa: emoji = "🥜"
+                default: emoji = "🌶"
+                }
+                
+                let p = porcion.value == 1 ? "porción" : "porciones"
+                
+                grupos[index]?.text = "\(emoji) \(porcion.value) \(p) de \(porcion.key)"
+                index += 1
+                
+            }
+            
+        } else {
+            
+            grupo3Label.text = "😋👌"
+            
+        }
+        
+    }
+    
     // Ir a pantalla de Registrar comida.
     @IBAction func registrarComidaPressed(_ sender: UIButton) {
         
@@ -69,7 +132,6 @@ class InicioViewController: UIViewController {
     // Ir a pantalla de Agregar comida.
     @IBAction func agregarComidaPressed(_ sender: UIButton) {
         
-//        self.performSegue(withIdentifier: "AgregarComidaSegue", sender: self)
         let agregarComidaVC = self.storyboard?.instantiateViewController(withIdentifier: "AgregarComidaVC") as! AgregarComidaViewController
         agregarComidaVC.modalPresentationStyle = .fullScreen
         self.navigationController?.present(agregarComidaVC, animated: true, completion: nil)
@@ -82,7 +144,6 @@ class InicioViewController: UIViewController {
         let menuTableViewController = MenuTableViewController()
         menuTableViewController.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(menuTableViewController, animated: true)
-        //self.present(menuTableViewController, animated: true)
         
     }
 

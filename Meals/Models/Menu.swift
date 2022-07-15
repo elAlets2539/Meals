@@ -106,9 +106,19 @@ class Menu {
         
     }
     
-    func getPorciones(_ tiempo: Tiempo) -> [Ingrediente.Tipo : Int] {
+    func getPorciones(_ tiempo: String) -> [Ingrediente.Tipo : Int] {
         
-        return porciones[tiempo]!
+        switch tiempo {
+            
+        case K.Tiempos.colMat: return porciones[Tiempo.colMat]!
+        case K.Tiempos.desayuno: return porciones[Tiempo.desayuno]!
+        case K.Tiempos.colVesp: return porciones[Tiempo.colVesp]!
+        case K.Tiempos.comida: return porciones[Tiempo.comida]!
+        case K.Tiempos.colNoct: return porciones[Tiempo.colNoct]!
+        case K.Tiempos.cena: return porciones[Tiempo.cena]!
+        default: return porciones[Tiempo.colMat]!
+            
+        }
         
     }
     

@@ -40,6 +40,7 @@ enum Tiempo {
 struct Ingrediente: Hashable {
     
     enum Tipo {
+        
         case verdura
         case fruta
         case cereal
@@ -47,13 +48,51 @@ struct Ingrediente: Hashable {
         case animal
         case leche
         case grasa
+        
+        var description : String {
+
+            switch self {
+            case .verdura:
+                return K.Ingredientes.Tipos.verdura
+            case .fruta:
+                return K.Ingredientes.Tipos.fruta
+            case .cereal:
+                return K.Ingredientes.Tipos.cereal
+            case .leguminosa:
+                return K.Ingredientes.Tipos.leguminosa
+            case .animal:
+                return K.Ingredientes.Tipos.animal
+            case .leche:
+                return K.Ingredientes.Tipos.leche
+            case .grasa:
+                return K.Ingredientes.Tipos.grasa
+            }
+            
+        }
     }
     
     enum Unidad {
+        
         case tz
         case pza
         case cdita
         case g
+        
+        var description : String {
+            
+            switch self {
+            case .tz:
+                return K.Ingredientes.Unidades.tz
+            case .pza:
+                return K.Ingredientes.Unidades.pza
+            case .cdita:
+                return K.Ingredientes.Unidades.cdita
+            case .g:
+                return K.Ingredientes.Unidades.g
+            }
+            
+        }
+        
     }
     
     let nombre: String
