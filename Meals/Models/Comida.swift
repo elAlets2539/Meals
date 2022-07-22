@@ -107,6 +107,7 @@ struct Ingrediente: Hashable {
         self.unidad = unidad
     }
     
+    // Regresa un Tipo como un String.
     static func firebaseFormat(_ tipo: Tipo) -> String {
         
         switch tipo {
@@ -130,6 +131,7 @@ struct Ingrediente: Hashable {
         
     }
     
+    // Regresa una Unidad como un String.
     static func firebaseFormat(_ unidad: Unidad) -> String {
         
         switch unidad {
@@ -147,6 +149,7 @@ struct Ingrediente: Hashable {
         
     }
     
+    // Obtener un Tipo dado un String.
     static func tipoFormat(_ tipo: String) -> Tipo {
         
         switch tipo {
@@ -172,6 +175,7 @@ struct Ingrediente: Hashable {
         
     }
     
+    // Obtener una Unidad dado un String.
     static func unidadFormat(_ unidad: String) -> Unidad {
         
         switch unidad {
@@ -204,21 +208,12 @@ struct Receta {
     func formatInsumoToDict(_ ingrediente: Ingrediente) -> [String : Any] {
         
         var dict = [String : Any]()
-//        let keys = Array(insumos.keys)
         
-//        for key in keys {
-            
-//            if key.nombre == nombre {
-                
-                dict["nombre"] = ingrediente.nombre
-                dict["tipo"] = Ingrediente.firebaseFormat(ingrediente.tipo)
-                dict["porcion"] = ingrediente.porcion
-                dict["unidad"] = Ingrediente.firebaseFormat(ingrediente.unidad)
-                dict["cantidad"] = insumos[ingrediente]
-                
-//            }
-            
-//        }
+        dict["nombre"] = ingrediente.nombre
+        dict["tipo"] = Ingrediente.firebaseFormat(ingrediente.tipo)
+        dict["porcion"] = ingrediente.porcion
+        dict["unidad"] = Ingrediente.firebaseFormat(ingrediente.unidad)
+        dict["cantidad"] = insumos[ingrediente]
         
         return dict
         

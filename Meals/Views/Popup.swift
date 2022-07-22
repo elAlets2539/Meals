@@ -304,27 +304,28 @@ class Popup: UIView {
     @objc private func agregarPressed(_ sender: UIButton!) {
         
         let nombreIngrediente = nombreTextField.text!
-        var unidad: Ingrediente.Unidad
-        
-        switch unidadButton.titleLabel!.text! {
-            
-        case K.Ingredientes.Unidades.tz:
-            unidad = .tz
-            break
-        case K.Ingredientes.Unidades.pza:
-            unidad = .pza
-            break
-        case K.Ingredientes.Unidades.cdita:
-            unidad = .cdita
-            break
-        case K.Ingredientes.Unidades.g:
-            unidad = .g
-            break
-        default:
-            unidad = .tz
-            break
-            
-        }
+//        var unidad: Ingrediente.Unidad
+//
+//        switch unidadButton.titleLabel!.text! {
+//
+//        case K.Ingredientes.Unidades.tz:
+//            unidad = .tz
+//            break
+//        case K.Ingredientes.Unidades.pza:
+//            unidad = .pza
+//            break
+//        case K.Ingredientes.Unidades.cdita:
+//            unidad = .cdita
+//            break
+//        case K.Ingredientes.Unidades.g:
+//            unidad = .g
+//            break
+//        default:
+//            unidad = .tz
+//            break
+//
+//        }
+        let unidad = Ingrediente.unidadFormat(unidadButton.titleLabel!.text!)
         
         if nombreIngrediente != "", let porcion = Int(porcionTextField.text!) {
             

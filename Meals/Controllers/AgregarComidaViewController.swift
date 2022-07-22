@@ -12,17 +12,21 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
     @IBOutlet weak var cancelarButton: UIButton!
     @IBOutlet weak var guardarButton: UIButton!
     
+    // Títulos del pickerView.
     let tiemposTitles = [K.Tiempos.colMat,
                          K.Tiempos.desayuno,
                          K.Tiempos.colVesp,
                          K.Tiempos.comida,
                          K.Tiempos.colNoct,
                          K.Tiempos.cena]
+    
+    // Opción predeterminada de tiempo es la colación matutina.
     var tiempoSeleccionado = K.Tiempos.colMat
 
     var receta = Receta()
     let dataManager = DataManager()
     
+    // Determinar si se va a agregar una nueva comida al menú (opción por defecto) o únicamente registrarla como comida del día.
     enum Modo {
         case agregar
         case registrar
@@ -47,6 +51,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
     }
     
+    // Redondear esquinas de elementos y establecer colores.
     func setupElements() {
         
         ingredientesTableView.layer.cornerRadius = 20
@@ -59,6 +64,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
     }
     
+    // Abrir el Popup para agregar nuevo ingrediente a la receta.
     @IBAction func addIngredientePressed(_ sender: UIButton) {
         
         let pop = Popup()
@@ -102,6 +108,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
     }
     
+    // Agregar comida a Firebase.
     func agregarComida(_ nombre: String) {
         
         var ingredientes = [[String: Any]]()
@@ -113,6 +120,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         
     }
     
+    // Alerta para preguntar si se desea también agregar la comida registrada al menú.
     func alertAgregarAlMenu(_ nombre: String) {
         
         let alert = UIAlertController(title: "¿Agregar \(nombre) al menú?", message: "", preferredStyle: .alert)
@@ -137,6 +145,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
         self.dismiss(animated: true)
     }
     
+    // Función que llama el Popup delegate.
     func ingredienteRegistrado(nombre: String, tipo: Ingrediente.Tipo, porcion: Int, unidad: Ingrediente.Unidad, cantidad: Int) {
         let ingrediente = Ingrediente(nombre, tipo, porcion, unidad)
         receta.insumos[ingrediente] = cantidad

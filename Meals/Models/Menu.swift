@@ -16,6 +16,7 @@ class Menu {
     var colacionesNoct = [Comida]()
     var cenas = [Comida]()
     
+    // Hardcoded, cambiar posteriormente a plan ingresado por el usuario.
     var porciones = [Tiempo.colMat : [Ingrediente.Tipo.fruta : 1,
                                       Ingrediente.Tipo.cereal : 1,
                                       Ingrediente.Tipo.leche : 1,
@@ -106,6 +107,7 @@ class Menu {
         
     }
     
+    // Obtener las porciones de un tiempo dado.
     func getPorciones(_ tiempo: String) -> [Ingrediente.Tipo : Int] {
         
         switch tiempo {

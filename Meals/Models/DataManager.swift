@@ -23,8 +23,10 @@ struct DataManager {
         
     }
     
+    // Obtener menu del usuario de Firebase y almacenarlo en el (Singleton) Menú.
     func getComidasFromDB() {
         
+        // Borrar contenido para evitar duplicados
         menu.resetMenu()
         
         db.collection("users").document(User.id).collection("menu").getDocuments { snapshot, error in
@@ -45,6 +47,7 @@ struct DataManager {
                         var receta = Receta()
                         let ingredientesArray = data["ingredientes"] as! [Any]
                         
+                        // Obtener Tiempo dado un String
                         switch tiempoString {
                             
                         case K.Tiempos.colMat:
@@ -70,6 +73,7 @@ struct DataManager {
                             
                         }
                         
+                        // Crear receta con los ingredientes recuperados
                         for ingrediente in ingredientesArray {
                             
                             let insumo = Receta.formatDictToInsumo(ingrediente as! [String: Any])
@@ -77,6 +81,7 @@ struct DataManager {
                             
                         }
                         
+                        // Insertar receta al menú
                         self.menu.agregarComida(tiempo: tiempo, nombre: nombre, receta: receta)
                         
                     }
@@ -89,6 +94,7 @@ struct DataManager {
         
     }
     
+    // Obtener estatus de alimentación del usuario en el día actual.
     func getDiarioFromDB(completion:@escaping () -> Void) {
         
         db.collection("users").document(User.id).collection("diario").getDocuments { snapshot, error in
@@ -107,11 +113,13 @@ struct DataManager {
                         let comidaPendiente = data["comidaPendiente"] as! String
                         let lastUpdate = data["dia"] as! String
                         
+                        // Si la última actualización fue el día anterior, iniciar día nuevo con primera comida (colMat)
                         User.comidaPendiente = (lastUpdate != date) ? "Colación matutina" : comidaPendiente
                         User.lastUpdateDate = lastUpdate
                         
                     }
                     
+                    // Ejecutar closure una vez que se obtuvieron los datos de Firebase
                     DispatchQueue.main.async {
                         completion()
                     }
@@ -124,6 +132,7 @@ struct DataManager {
         
     }
     
+    // Agregar nueva comida al menú en Firebase.
     func agregarComida(_ nombre: String, _ tiempo: String, _ ingredientes: [[String: Any]]) {
         
         db.collection("users").document(User.id).collection("menu").addDocument(data: ["nombre": nombre,
@@ -136,6 +145,7 @@ struct DataManager {
         
     }
     
+    // Registrar comida del día actual en Firebase.
     func registrarComida() {
         
         var documentID = ""
@@ -153,6 +163,7 @@ struct DataManager {
                     
                 }
                 
+                // Si ya existe un registro
                 if documentID != "" {
                     
                     db.collection("users").document(User.id).collection("diario").document(documentID).updateData(["dia" : date,
@@ -163,7 +174,7 @@ struct DataManager {
                         
                     }
                     
-                } else {
+                } else {    // Si es la primera vez que se hace el registro
                     
                     db.collection("users").document(User.id).collection("diario").addDocument(data: ["dia" : date,
                                                                                                      "comidaPendiente" : siguienteComida]) { error in
@@ -174,6 +185,7 @@ struct DataManager {
                     
                 }
                 
+                // Una vez que se registró la comida, pasar a la siguiente.
                 User.comidaPendiente = siguienteComida
 
             }

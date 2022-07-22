@@ -99,7 +99,7 @@ class InicioViewController: UIViewController {
                 case K.Ingredientes.Tipos.fruta: emoji = "🍎"
                 case K.Ingredientes.Tipos.cereal: emoji = "🍞"
                 case K.Ingredientes.Tipos.leguminosa: emoji = "🫘"
-                case K.Ingredientes.Tipos.animal: emoji = "🐮"
+                case K.Ingredientes.Tipos.animal: emoji = "🥩"
                 case K.Ingredientes.Tipos.leche: emoji = "🥛"
                 case K.Ingredientes.Tipos.grasa: emoji = "🥜"
                 default: emoji = "🌶"

@@ -32,11 +32,15 @@ class LoginViewController: UIViewController {
                 if let e = error {
                     print(e.localizedDescription)
                 } else {
+                    
+                    // Guardar ID para futuras llamadas a Firebase
                     User.id = Auth.auth().currentUser!.uid
-//                    print(User.id)
+
+                    // Preparar pantalla siguiente
                     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Salir", style: .plain, target: nil, action: nil)
                     let inicioVC = self.storyboard?.instantiateViewController(withIdentifier: "InicioVC") as! InicioViewController
                     self.navigationController?.pushViewController(inicioVC, animated: true)
+                    
                 }
                 
             }

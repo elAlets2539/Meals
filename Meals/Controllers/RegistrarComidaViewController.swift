@@ -86,6 +86,7 @@ class RegistrarComidaViewController: UIViewController {
         
     }
     
+    // Abrir pantalla de agregar comida, estableciendo el modo para registrar.
     @objc func registrarNueva() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -145,6 +146,8 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
             let dataManager = DataManager()
             dataManager.registrarComida()
             self.dismiss(animated: true)
+            self.searchBar.text = ""
+            self.searchBar(self.searchBar, textDidChange: "")
         }
         
         let cancelar = UIAlertAction(title: "Cancelar", style: .default) { action in
