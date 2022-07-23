@@ -16,6 +16,8 @@ class Menu {
     var colacionesNoct = [Comida]()
     var cenas = [Comida]()
     
+    private lazy var comidasArray = [colacionesMat, desayunos, colacionesVesp, comidas, colacionesNoct, cenas]
+    
     // Hardcoded, cambiar posteriormente a plan ingresado por el usuario.
     var porciones = [Tiempo.colMat : [Ingrediente.Tipo.fruta : 1,
                                       Ingrediente.Tipo.cereal : 1,
@@ -89,8 +91,6 @@ class Menu {
         
         var results = [(String, String)]()
         
-        let comidasArray = [colacionesMat, desayunos, colacionesVesp, comidas, colacionesNoct, cenas]
-        
         for array in comidasArray {
             
             for comida in array {
@@ -107,7 +107,26 @@ class Menu {
         
     }
     
-    // Obtener las porciones de un tiempo dado.
+    // Proporcionar un objeto Comida de un nombre dado.
+    func getComida(nombre: String) -> Comida? {
+        
+        for array in comidasArray {
+            
+            for comida in array {
+                
+                if let _ = comida.nombre.range(of: nombre, options: .caseInsensitive) {
+                    return comida
+                }
+                
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    // Proporcionar las porciones de un tiempo dado.
     func getPorciones(_ tiempo: String) -> [Ingrediente.Tipo : Int] {
         
         switch tiempo {

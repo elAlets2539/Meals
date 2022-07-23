@@ -95,7 +95,7 @@ class AgregarComidaViewController: UIViewController, PopupDelegate {
                 
             case .registrar:
                 
-                dataManager.registrarComida()
+                dataManager.registrarComida(nombre)
                 alertAgregarAlMenu(nombre)
                 
 //                self.dismiss(animated: true)

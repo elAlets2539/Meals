@@ -13,6 +13,9 @@ struct User {
     static var comidaPendiente = K.Tiempos.colMat
     static var lastUpdateDate = ""
     
+    static var porcionesPendientes = [Ingrediente.Tipo : Int]()
+    static var porcionesExtras = [Ingrediente.Tipo : Int]()
+    
     static func siguienteComida() -> String {
         
         switch comidaPendiente {

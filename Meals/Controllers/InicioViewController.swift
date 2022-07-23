@@ -43,7 +43,8 @@ class InicioViewController: UIViewController {
         dataManager.getDiarioFromDB() { [self] in
             
             self.comidaPendienteLabel.text = "Siguiente comida: \(User.comidaPendiente)"
-            setPorciones(User.comidaPendiente)
+//            setPorciones(User.comidaPendiente)
+            setPorciones()
             
         }
         
@@ -66,12 +67,15 @@ class InicioViewController: UIViewController {
     }
     
     // Preparar labels de acuerdo con las porciones a consumir.
-    func setPorciones(_ comida: String) {
+//    func setPorciones(_ comida: String) {
+    func setPorciones() {
         
-        if comida != "Ninguna" {
+//        if comida != "Ninguna" {
+        if User.siguienteComida() != "Ninguna" {
          
             // Contar las diferentes porciones para elegir en cuáles labels colocarlas (para estar centradas)
-            let porciones = menu.getPorciones(User.comidaPendiente)
+//            let porciones = menu.getPorciones(User.comidaPendiente)
+            let porciones = User.porcionesPendientes
             let grupos = [grupo1Label, grupo2Label, grupo3Label, grupo4Label, grupo5Label, grupo6Label, grupo7Label]
             var index = 0
             

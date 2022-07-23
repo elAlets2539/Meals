@@ -140,11 +140,12 @@ extension RegistrarComidaViewController: UITableViewDelegate, UITableViewDataSou
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let alert = UIAlertController(title: "¿Registrar \(results[indexPath.row].0)?", message: "", preferredStyle: .alert)
+        let nombreComida = results[indexPath.row].0
+        let alert = UIAlertController(title: "¿Registrar \(nombreComida)?", message: "", preferredStyle: .alert)
         
         let aceptar = UIAlertAction(title: "Aceptar", style: .default) { action in
             let dataManager = DataManager()
-            dataManager.registrarComida()
+            dataManager.registrarComida(nombreComida)
             self.dismiss(animated: true)
             self.searchBar.text = ""
             self.searchBar(self.searchBar, textDidChange: "")
